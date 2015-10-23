@@ -10,13 +10,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import cn.ilongfei.springbootbasic.domain.User;
-import cn.ilongfei.springbootbasic.framework.shiro.PasswordHelper;
 import cn.ilongfei.springbootbasic.repository.SimpleUserRepository;
 
 @Service
 public class UserService {
 	@Autowired SimpleUserRepository simpleUserRepository;
-	@Autowired private PasswordHelper passwordHelper;
 	public List<User> findAll(){
 		return simpleUserRepository.findAll();
 	}
@@ -27,7 +25,6 @@ public class UserService {
      */
     public User createUser(User user) {
         //加密密码
-        passwordHelper.encryptPassword(user);
         return simpleUserRepository.save(user);
     }
 
@@ -39,7 +36,6 @@ public class UserService {
     public void changePassword(Long userId, String newPassword) {
         User user = simpleUserRepository.findOne(userId);
         user.setPassword(newPassword);
-        passwordHelper.encryptPassword(user);
         simpleUserRepository.save(user);
     }
 
