@@ -1,0 +1,102 @@
+文件夹 PATH 列表
+卷序列号为 C200-AE8C
+D:.
+│  
+├─core
+│  │  app.core.js
+│  │  
+│  ├─config
+│  │      core.config.js				设置cfpLoadingBarProvider，menu，dashboardBox，load/set setting.  (loadSetting 在layout.ctrl.js中调用)
+│  │      core.routes.js				定义/router，/error，/app路由，设置默认路由为/router
+│  │      
+│  ├─controllers
+│  │      home.ctrl.js				似乎没有用处。  $scope.boxes = $rootScope.dashboardBox;？？？
+│  │      layout.ctrl.js				设置setting的各项值为$scope属性，定义toggleSidebar函数，调用$rootScope.loadSettings();
+│  │      main.ctrl.js				取当前用户信息（如未登录，则跳转到login），设置menuoptions = menu，定义logout函数
+│  │      router.ctrl.js				查询API版本，检查服务器是否有响应，如没有，跳转到/error，如有，检查AppAuth.currentUser，如果存在（表示已登录），跳转到/app.否则跳转到/login
+│  │      
+│  ├─directives
+│  │      admin-box.js
+│  │      admin-form.js
+│  │      admin-header.js				modules/core/views/elements/admin-header.html,是不是profile中的？在哪里用到？
+│  │      date.js					dateButton
+│  │      home.js
+│  │      navbar.js
+│  │      small-box.directive.js			smallBox
+│  │      
+│  ├─helpers
+│  │      FormHelper.js				对form的封装，封装了delete，cancel。delte弹出提示框，调用model.deleteById进行删除操作，成功后，利用toastSuccess提示。
+│  │      
+│  ├─services
+│  │      api.service.js				提供checkConnection函数，return $q(function (resolve, reject) ｛｝返回promise！！！值得研究
+│  │      core.service.js				定义了alert，alertSuccess、confirm、toastSuccess等函数
+│  │      meta.service.js				？？？？
+│  │      
+│  └─views
+│      │  app.html
+│      │  home.html
+│      │  
+│      └─elements
+│          │  admin-header.html
+│          │  navbar.html
+│          │  small-box.html
+│          │  
+│          └─fields
+│                  date.html
+│                  formly-field-checkbox.html
+│                  formly-field-email.html
+│                  formly-field-hidden.html
+│                  formly-field-number.html
+│                  formly-field-password.html
+│                  formly-field-radio.html
+│                  formly-field-select.html
+│                  formly-field-text.html
+│                  formly-field-textarea.html
+│                  phone-number.html
+│                  time.html
+│                  
+├─settings
+│  │  app.settings.js
+│  │  
+│  ├─config
+│  │      settings.config.js
+│  │      settings.routes.js
+│  │      
+│  ├─services
+│  │      setting.service.js
+│  │      
+│  └─views
+│          form.html
+│          list.html
+│          main.html
+│          view.html
+│          
+└─users
+    │  app.users.js
+    │  
+    ├─config
+    │      users.auth.js
+    │      users.config.js
+    │      users.routes.js
+    │      
+    ├─controllers
+    │      login.ctrl.js
+    │      register.ctrl.js
+    │      
+    ├─directives
+    │      login.js
+    │      register.js
+    │      
+    ├─services
+    │      appauth.service.js
+    │      user.service.js
+    │      
+    └─views
+            form.html
+            list.html
+            login.html
+            main.html
+            profile.html
+            register.html
+            view.html
+            
