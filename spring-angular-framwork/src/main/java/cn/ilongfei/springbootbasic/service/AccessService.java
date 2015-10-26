@@ -27,4 +27,8 @@ public class AccessService {
 		return result;
 	}
 	
+	/*public boolean checkAccessToken(String token){
+		return "qwerty".equals(token);
+	}*/
+	
 }

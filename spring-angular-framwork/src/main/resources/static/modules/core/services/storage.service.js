@@ -1,7 +1,7 @@
 (function () {
   'use strict';
   angular
-    .module('com.module.sys')
+    .module('com.module.core')
     .service('StorageService', function () {
 
     	var storage = window.localStorage;
