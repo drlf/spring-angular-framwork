@@ -1,5 +1,7 @@
-package cn.ilongfei.springbootbasic.controller;
+package cn.ilongfei.springbootbasic.controller.rest;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -11,9 +13,11 @@ import cn.ilongfei.springbootbasic.domain.User;
 import cn.ilongfei.springbootbasic.service.UserService;
 
 @RestController
-@RequestMapping("/user")
+@RequestMapping("/api/user")
 public class UserController {
 
+	private static Logger log = LoggerFactory.getLogger(UserController.class);
+	
 	@Autowired
 	UserService userService;
 
