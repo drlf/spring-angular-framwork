@@ -21,12 +21,12 @@ public class IndexController {
 
 	private static Logger log = LoggerFactory.getLogger(IndexController.class);
 	
-	@RequestMapping(value = "/login"    )
+	/*@RequestMapping(value = "/login"    )
     public String showLoginForm(HttpServletRequest req, Model model) {
         return "/login.html";
-    }
+    }*/
 	
-	@RequestMapping(value = "/login", method = RequestMethod.POST )
+	/*@RequestMapping(value = "/login", method = RequestMethod.POST )
 	@ResponseBody
     public Map login(@RequestBody User user) {
 		HashMap result = new HashMap();
@@ -34,7 +34,7 @@ public class IndexController {
 		result.put("refereshToken", "123321");
 		result.put("userId", "111");
         return result;
-    }
+    }*/
 	
 	
 }
