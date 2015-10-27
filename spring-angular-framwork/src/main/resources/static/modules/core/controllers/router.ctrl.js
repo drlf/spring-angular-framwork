@@ -12,12 +12,12 @@
    **/
   angular
     .module('com.module.core')
-    .controller('RouteCtrl', function (ApiService, AppAuth, $location) {
-
+    .controller('RouteCtrl', function (ApiService, AppAuth, $location, AuthCoreSrv) {
+      console.log('½øÈërouterCOntroller¡£¡£¡£');
       ApiService.checkConnection()
         .then(function () {
           console.log('ApiService.checkConnection success');
-          if (!AppAuth.currentUser) {
+          if (!AuthCoreSrv.credentials.username || !AuthCoreSrv.credentials.refereshToken) {
             $location.path('/login');
           } else {
             $location.path('/app');

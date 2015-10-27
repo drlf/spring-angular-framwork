@@ -73,13 +73,13 @@
         window.location = CoreService.env.siteUrl + provider.authPath;
       };
 
-      AuthProvider.count(function (result) {
+      /*AuthProvider.count(function (result) {
         if (result.count > 0) {
           AuthProvider.find(function (result) {
             $scope.authProviders = result;
           });
         }
-      });
+      });*/
 
       $scope.login = function () {
 

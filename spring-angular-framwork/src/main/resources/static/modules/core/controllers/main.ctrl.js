@@ -13,8 +13,10 @@
    **/
   angular
     .module('com.module.core')
-    .controller('MainCtrl', function ($scope, $rootScope, $state, AppAuth, CoreService, User, gettextCatalog) {
-      AppAuth.ensureHasCurrentUser(function () {
+    .controller('MainCtrl', function ($scope, $rootScope, $state, Auth CoreService, User, gettextCatalog) {
+
+    //AuthCoreSrv.credentials
+    AppAuth.ensureHasCurrentUser(function () {
         //This call also serves to redirect a user to the login screen, via the interceptor in users.auth.js, if they are not authenticated.
         $scope.currentUser = User.getCurrent();
       });

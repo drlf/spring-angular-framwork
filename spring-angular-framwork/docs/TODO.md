@@ -1,0 +1,1 @@
+users.auth.js中的config改到core中

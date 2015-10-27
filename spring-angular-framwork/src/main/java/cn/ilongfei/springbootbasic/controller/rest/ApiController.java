@@ -18,9 +18,9 @@ import cn.ilongfei.springbootbasic.service.UserService;
 
 @RequestMapping("/api")
 @RestController
-public class AnyController {
+public class ApiController {
 
-	private static Logger log = LoggerFactory.getLogger(AnyController.class);
+	private static Logger log = LoggerFactory.getLogger(ApiController.class);
 
 	// 验证用户名和密码，输出refereshToken
 	@RequestMapping(value = "/settings")
@@ -30,6 +30,15 @@ public class AnyController {
 		result.put("","");
 		return result;
 	}
+	
+	@RequestMapping(value = "/version"    )
+	@ResponseBody
+    public Map getVersion() {
+		Map result = new HashMap();
+		result.put("version","1.0.0");
+        return result;
+    }
+	
 	/*
 	@RequestMapping(value = "/files")
 	public Map showLoginForm(@RequestBody User user) {

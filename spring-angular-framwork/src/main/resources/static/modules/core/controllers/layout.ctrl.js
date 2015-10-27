@@ -54,7 +54,7 @@
 
       $scope.settings = $rootScope.settings;
 
-      $rootScope.loadSettings();
+      //$rootScope.loadSettings();
 
     });
 

@@ -29,7 +29,6 @@ public class AccessController {
 	// 验证用户名和密码，输出refereshToken
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public Map showLoginForm(@RequestBody User user) {
-		// userService.
 		Map result = accessService.login(user.getUsername(), user.getPassword());
 		return result;
 	}
@@ -39,7 +38,6 @@ public class AccessController {
 	@ResponseBody
 	public Map referesh(@RequestBody String refereshToken) {
 		// TODO 从cache中获取refereshToken，如果未实效
-		
 		Map result = accessService.referesh(refereshToken);
 		return result;
 	}

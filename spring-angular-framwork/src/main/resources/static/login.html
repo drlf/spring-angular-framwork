@@ -55,6 +55,7 @@
 <script src="bower_components/angular-gettext/dist/angular-gettext.js"></script>
 <script src="/modules/core/app.core.js"></script>
 <script src="/modules/core/services/storage.service.js"></script>
+<script src="/modules/core/services/auth.service.js"></script>
 <!-- 
 <script src="/js/app.js"></script>
 <script src="/js/config.js"></script>
@@ -64,17 +65,34 @@
 (function () {
 'use strict';
 var loginApp = angular.module('loopbackApp', ['toasty','ngAnimate','com.module.core']);
-loginApp.controller('LoginCtrl', function ($scope, $rootScope, $http, $location, toasty, StorageService) {
+loginApp.controller('LoginCtrl', function ($scope, $rootScope, $http, $location, toasty, StorageService, AuthCoreSrv) {
 	
 	var mainPage = '/index.html';
-	
+	var defaultCredentials = {username:"", password: "", rememberMe: false};
 	$scope.init = function(){
 		//$scope.credentials = {rememberMe: true, username: "lf", password:"123"};
 		$scope.credentials = StorageService.getCredentials();
+      if(!$scope.credentials)$scope.credentials = defaultCredentials;
 	};
-	
-	$scope.login = function(){
-		$http.post('/access/login',$scope.credentials).success(function(data){
+
+    $scope.login = function(){
+      AuthCoreSrv.login($scope.credentials, function(data){
+        var next = $location.nextAfterLogin || mainPage;
+        $location.nextAfterLogin = null;
+        $scope.credentials.refereshToken = data.refereshToken;
+        toastInfo('登录', '登录成功');
+        if (next === '/login') {
+          next = mainPage;
+        }
+        location.href = next;
+      }, function(data){
+        toastInfo('登录', '登录失败');
+      })
+    }
+
+	/*$scope.login = function(){
+		$http.post('/access/login',$scope.credentials)
+                .success(function(data, status, headers, config){
 	        var next = $location.nextAfterLogin || mainPage;
 	        $location.nextAfterLogin = null;
 	        $scope.credentials.refereshToken = data.refereshToken;
@@ -86,7 +104,7 @@ loginApp.controller('LoginCtrl', function ($scope, $rootScope, $http, $location,
 	        }
 	        location.href = next;
     		});
-	}
+	}*/
 	
 	var toastInfo = function (title, text) {
         toasty.pop.info({
