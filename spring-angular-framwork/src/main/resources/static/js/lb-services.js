@@ -34,8 +34,17 @@ var module = angular.module("lbServices", ['ngResource']);
   module.factory(
       "Setting",
       ['Resource', function(Resource) {
-        return Resource("/setting/:id",
-            { 'id': '@id' });
+        return Resource("/settings/:id",
+            { 'id': '@id' },
+            {
+                "query": {
+                    interceptor: {
+                        response: function(response) {
+                            return response.data._embedded.settings;
+                        }
+                    }
+                }
+            });
       }]);
 
 })(window, window.angular);

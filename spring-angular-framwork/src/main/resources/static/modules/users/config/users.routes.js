@@ -24,13 +24,14 @@
           templateUrl: 'modules/users/views/list.html',
           controllerAs: 'ctrl',
           controller: function (users) {
+        	  console.log('users page....');
             console.log('users', users);
             this.users = users;
           },
           resolve: {
             users: function (UserService) {
               console.log('users');
-              return UserService.find();
+              return UserService.query();
             }
           }
         })

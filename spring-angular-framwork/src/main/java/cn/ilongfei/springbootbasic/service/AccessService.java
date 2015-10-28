@@ -16,7 +16,8 @@ public class AccessService {
 		String refereshToken = "asdfgh";
 		HashMap result = new HashMap();
 		result.put("refereshToken", refereshToken);
-		result.put("useId", "1");
+		result.put("userId", "1");
+		result.put("username", "lf");
 		return result;
 	}
 	

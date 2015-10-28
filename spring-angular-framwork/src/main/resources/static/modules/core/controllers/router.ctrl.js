@@ -1,24 +1,18 @@
 (function () {
   'use strict';
-  /**
-   * @ngdoc function
-   * @name com.module.core.controller:RouteCtrl
-   * @description Redirect for acess
-   * @requires $q
-   * @requires $scope
-   * @requires $state
-   * @requires $location
-   * @requires AppAuth
-   **/
+  
   angular
     .module('com.module.core')
-    .controller('RouteCtrl', function (ApiService, AppAuth, $location, AuthCoreSrv) {
-      console.log('½øÈërouterCOntroller¡£¡£¡£');
+    .controller('RouteCtrl', function (ApiService, $location, AuthCoreSrv) {
+        console.log('RouteCtrl....');
       ApiService.checkConnection()
         .then(function () {
           console.log('ApiService.checkConnection success');
-          if (!AuthCoreSrv.credentials.username || !AuthCoreSrv.credentials.refereshToken) {
-            $location.path('/login');
+          var credentials = AuthCoreSrv.getCredentials();
+          if (!credentials.username || !credentials.refereshToken) {
+        	  console.log(credentials.username);
+        	  console.log(credentials.refereshToken);
+            //location.href = '/login.html';
           } else {
             $location.path('/app');
           }

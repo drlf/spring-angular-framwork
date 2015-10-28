@@ -71,12 +71,34 @@
 
       // Get Settings for Loopback Service
       $rootScope.loadSettings = function () {
-        console.log('×°ÔØsettings....');
-        Setting.find(function (settings) {
+        console.log('loadSettings....');
+        Setting.query(function (settings) {
           $rootScope.settings.data = settings;
         });
       };
 
-    });
+
+    })
+
+    //by LF.
+    // check the refereshtoken .Init system setting and get user info
+    //$rootScope.loadSettings();
+    .run(function ($rootScope, Setting, AuthCoreSrv, StorageService, User) {
+      console.log('run........');
+
+        var credentials = StorageService.getCredentials();
+        //TODO if refershToken or username is null, redirect to login.html
+        AuthCoreSrv.setCredentials(credentials);
+        /*AuthCoreSrv.refereshToken(credentials.refereshToken, function(data){
+          //TODO update accessToken , user info and permission
+        });*/
+
+        $rootScope.currentUser = User.get({
+          id : credentials.userId
+        });
+
+        $rootScope.loadSettings();
+    })
+  ;
 
 })();

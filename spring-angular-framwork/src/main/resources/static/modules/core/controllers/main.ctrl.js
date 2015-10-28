@@ -1,36 +1,22 @@
-(function () {
-  'use strict';
-  /**
-   * @ngdoc function
-   * @name com.module.core.controller:MainCtrl
-   * @description Login Controller
-   * @requires $scope
-   * @requires $state
+(function() {
+	'use strict';
 
-   * @requires CoreService
-   * @requires User
-   * @requires gettextCatalog
-   **/
-  angular
-    .module('com.module.core')
-    .controller('MainCtrl', function ($scope, $rootScope, $state, Auth CoreService, User, gettextCatalog) {
+	angular.module('com.module.core').controller(
+			'MainCtrl',
+			function($scope, $rootScope, $state, AuthCoreSrv, User) {
+			/*console.log('AuthCoreSrv.credentials.userId = ' + AuthCoreSrv.getCredentials().userId);
+				$scope.currentUser = User.get({
+					id : AuthCoreSrv.getCredentials().userId
+				});*/
+				$scope.menuoptions = $rootScope.menu;
 
-    //AuthCoreSrv.credentials
-    AppAuth.ensureHasCurrentUser(function () {
-        //This call also serves to redirect a user to the login screen, via the interceptor in users.auth.js, if they are not authenticated.
-        $scope.currentUser = User.getCurrent();
-      });
+				$scope.logout = function() {
+					AppAuth.logout(function() {
+						CoreService.toastSuccess('ÈÄ?Âá?', 'ÈÄ?Âá∫ÊàêÂä?');
+						$state.go('login');
+					});
+				};
 
-      $scope.menuoptions = $rootScope.menu;
-
-      $scope.logout = function () {
-        AppAuth.logout(function () {
-          CoreService.toastSuccess(gettextCatalog.getString('Logged out'),
-            gettextCatalog.getString('You are logged out!'));
-          $state.go('login');
-        });
-      };
-
-    });
+			});
 
 })();

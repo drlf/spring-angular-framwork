@@ -23,13 +23,13 @@ public class ApiController {
 	private static Logger log = LoggerFactory.getLogger(ApiController.class);
 
 	// 验证用户名和密码，输出refereshToken
-	@RequestMapping(value = "/settings")
+	/*@RequestMapping(value = "/settings")
 	public Map showLoginForm(@RequestBody User user) {
 		// userService.
 		Map result = new HashMap();
 		result.put("","");
 		return result;
-	}
+	}*/
 	
 	@RequestMapping(value = "/version"    )
 	@ResponseBody
