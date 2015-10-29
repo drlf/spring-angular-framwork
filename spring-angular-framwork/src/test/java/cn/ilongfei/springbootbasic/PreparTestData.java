@@ -1,8 +1,6 @@
 package cn.ilongfei.springbootbasic;
 
 
-import javax.transaction.Transactional;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -11,7 +9,9 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import cn.ilongfei.springbootbasic.domain.Setting;
 import cn.ilongfei.springbootbasic.domain.User;
+import cn.ilongfei.springbootbasic.repository.SettingRepository;
 import cn.ilongfei.springbootbasic.service.UserService;
 
 
@@ -20,19 +20,27 @@ import cn.ilongfei.springbootbasic.service.UserService;
 @ContextConfiguration(classes = RepositoryTestConfig.class)
 public class PreparTestData {
 	@Autowired protected UserService userService;
+	@Autowired protected SettingRepository settingRepository;
 	@Autowired protected JdbcTemplate jdbcTemplate;
 	
 	@Before
     public void setUp() {
+		
+	}
+	
+	//@Test
+    public void createUsers() {
 		User u1 = new User();
 		u1.setUsername("preUser");
 		u1.setPassword("123");
         userService.createUser(u1);
 	}
 	
+	
 	@Test
-    public void test() {
-		
+    public void createSettings() {
+		Setting s = new Setting("appName", "Angular Basic");
+		settingRepository.save(s);
 	}
     /*@Autowired
     protected PermissionService permissionService;
