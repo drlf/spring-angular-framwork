@@ -53,7 +53,7 @@
         }
       };
 
-      $scope.settings = $rootScope.settings;
+      //$scope.settings = $rootScope.settings;
 
       //$rootScope.loadSettings();
 

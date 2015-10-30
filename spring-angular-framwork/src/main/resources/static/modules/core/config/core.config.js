@@ -98,7 +98,7 @@
           id : credentials.userId
         });
 
-        //$rootScope.loadSettings();
+        $rootScope.loadSettings();
     })
   ;
 

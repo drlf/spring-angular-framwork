@@ -6,7 +6,7 @@
       $rootScope.addMenu(gettextCatalog.getString('Settings'),
         'app.settings.list', 'fa-cog');
 
-      /*$rootScope.getSetting = function (key) {
+      $rootScope.getSetting = function (key) {
         var valor = '';
         angular.forEach($rootScope.settings.data, function (item) {
           if (item.key === key) {
@@ -14,7 +14,7 @@
           }
         });
         return valor;
-      };*/
+      };
     });
 
 })();

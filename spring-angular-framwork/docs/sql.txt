@@ -1,0 +1,10 @@
+insert into USER(id, username,first_name, last_name) values(1,'lf','drlf' ,'dddd')
+
+insert into setting(key,value) values('appName', 'LoopBack Admin');
+insert into setting(key,value) values('appTheme', 'skin-blue');
+insert into setting(key,value) values('appLayout', 'fixed');
+
+insert into setting(key,value) values('appLayout', 'horizontal');
+insert into setting(key,value) values('formLabelSize', '3');
+insert into setting(key,value) values('formInputSize', '9');
+insert into setting(key,value) values('com.module.users.enable_registration', 'true');
