@@ -16,7 +16,7 @@ import cn.ilongfei.springbootbasic.domain.User;
 import cn.ilongfei.springbootbasic.service.AccessService;
 import cn.ilongfei.springbootbasic.service.UserService;
 
-@RequestMapping("/access")
+@RequestMapping("/api/access")
 @RestController
 public class AccessController {
 
@@ -28,11 +28,16 @@ public class AccessController {
 
 	// 验证用户名和密码，输出refereshToken
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public Map showLoginForm(@RequestBody User user) {
+	public Map login(@RequestBody User user) {
 		Map result = accessService.login(user.getUsername(), user.getPassword());
 		return result;
 	}
-
+	
+	@RequestMapping(value = "/logout", method = RequestMethod.POST)
+	public Map logout(@RequestBody User user) {
+		Map result = accessService.logout(user.getUsername());
+		return result;
+	}
 	// 使用refershToken更新accessToken
 	@RequestMapping(value = "/referesh", method = RequestMethod.POST)
 	@ResponseBody

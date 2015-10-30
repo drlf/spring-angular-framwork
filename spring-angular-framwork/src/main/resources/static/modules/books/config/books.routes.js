@@ -3,7 +3,6 @@
   angular
     .module('com.module.books')
     .config(function ($stateProvider) {
-    	console.log('books config......');
       $stateProvider
         .state('app.books', {
           abstract: true,

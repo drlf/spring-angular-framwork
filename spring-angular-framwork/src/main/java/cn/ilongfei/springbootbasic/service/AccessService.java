@@ -21,6 +21,13 @@ public class AccessService {
 		return result;
 	}
 	
+	public Map logout(String username){
+		HashMap result = new HashMap();
+		result.put("code", "00");
+		result.put("msg", "登出成功");
+		return result;
+	}
+	
 	// 重新获取accessToken
 	public Map referesh(String refereshToken){
 		String accessToken = "qwerty";

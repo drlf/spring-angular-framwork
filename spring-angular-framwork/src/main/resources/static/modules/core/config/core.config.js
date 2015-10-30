@@ -8,7 +8,7 @@
         cfpLoadingBarProvider.includeSpinner = false;
       }
     ])
-    .run(function ($rootScope, Setting, gettextCatalog) {
+    .run(function ($rootScope, Setting, gettextCatalog, ENV) {
 
       // Left Sidemenu
       $rootScope.menu = [];
@@ -67,13 +67,16 @@
       };
 
       // Load Settings blank
+        console.log('load setting from env....');
       $rootScope.settings = {};
+        $rootScope.settings.data = ENV.SETTING;
 
       // Get Settings for Loopback Service
       $rootScope.loadSettings = function () {
-        console.log('loadSettings....');
         Setting.query(function (settings) {
           $rootScope.settings.data = settings;
+
+          console.log($rootScope.settings);
         });
       };
 
@@ -84,8 +87,6 @@
     // check the refereshtoken .Init system setting and get user info
     //$rootScope.loadSettings();
     .run(function ($rootScope, Setting, AuthCoreSrv, StorageService, User) {
-      console.log('run........');
-
         var credentials = StorageService.getCredentials();
         //TODO if refershToken or username is null, redirect to login.html
         AuthCoreSrv.setCredentials(credentials);
@@ -97,7 +98,7 @@
           id : credentials.userId
         });
 
-        $rootScope.loadSettings();
+        //$rootScope.loadSettings();
     })
   ;
 

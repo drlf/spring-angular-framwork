@@ -1,6 +1,6 @@
 (function(window, angular, undefined) {'use strict';
 
-var urlBase = "http://localhost:9000/api";
+var urlBase = "http://localhost/api";
 var authHeader = 'authorization';
 
 var module = angular.module("lbServices", ['ngResource']);
