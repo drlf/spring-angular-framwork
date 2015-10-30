@@ -3,10 +3,12 @@ package cn.ilongfei.springbootbasic.controller.rest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import cn.ilongfei.springbootbasic.domain.User;
@@ -32,23 +34,24 @@ public class UserController {
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-	public String deleteById(@PathVariable long id) {
+	@ResponseStatus(HttpStatus.NO_CONTENT)
+	public void deleteById(@PathVariable long id) {
 		userService.delete(id);
-		return "ok";
 	}
 
 	@RequestMapping(value = "/{id}",method = RequestMethod.PUT)
-	public String update(@PathVariable long id, @RequestBody User user) {
+	public User update(@PathVariable long id, @RequestBody User user) {
 		if(user.getId() == id){
 			userService.update(user);
-			return "OK.";
+			return user;
 		}else{
-			return "Failed.";
+			return null;
 		}
 		
 	}
 	
 	@RequestMapping(method = RequestMethod.POST)
+	@ResponseStatus(HttpStatus.CREATED)
 	public User save(@RequestBody User user) {
 		return userService.createUser(user);
 	}

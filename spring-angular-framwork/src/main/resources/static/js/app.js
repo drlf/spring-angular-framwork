@@ -49,6 +49,8 @@
       'com.module.products',
       'com.module.sandbox',*/
       'com.module.settings',
+      'com.module.pages',
+      'com.module.books',
       'com.module.users'
     ])
     .run(function (formlyConfig) {

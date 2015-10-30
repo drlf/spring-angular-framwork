@@ -1,0 +1,30 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    Books
+    <span class="pull-right btn-group">
+      <a href="" class="btn btn-xs btn-success" ui-sref="^.add()">
+        <i class="fa fa-plus"></i>
+      </a>
+    </span>
+  </div>
+
+  <div class='list-group'>
+    <div ng-repeat="book in ctrl.books" class="list-group-item">
+      <span class="pull-right btn-group">
+        <a class="btn btn-xs btn-default" ui-sref="app.books.password({ id: book.id })">
+          <i class="fa fa-key"></i>
+        </a>
+        <a class="btn btn-xs btn-default" ui-sref="app.books.edit({ id: book.id })">
+          <i class="fa fa-pencil"></i>
+        </a>
+        <a class="btn btn-xs btn-danger" ui-sref="app.books.delete({ id: book.id })">
+          <i class="fa fa-trash-o"></i>
+        </a>
+      </span>
+      <h4>
+        <a href="" ui-sref="app.books.view({id: book.id})">{{book.name}} {{book.sid}}</a>
+      </h4>
+
+    </div>
+  </div>
+</div>

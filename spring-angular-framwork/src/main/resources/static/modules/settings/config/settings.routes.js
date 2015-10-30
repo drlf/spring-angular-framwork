@@ -14,10 +14,12 @@
           templateUrl: 'modules/settings/views/list.html',
           controllerAs: 'ctrl',
           controller: function (settings) {
+            console.log('app.settings.list ctrl...');
             this.settings = settings;
           },
           resolve: {
             settings: function (SettingService) {
+              console.log('resolving setting...');
               return SettingService.find();
             }
           }
@@ -51,9 +53,16 @@
             this.formFields = SettingService.getFormFields();
             this.formOptions = {};
             this.submit = function () {
-              SettingService.upsert(this.setting).then(function () {
-                $state.go('^.list');
-              });
+              if(this.setting.id){
+                this.setting.$save().then(function () {
+                  $state.go('^.list');
+                });
+              }else{
+                SettingService.upsert(this.setting).then(function () {
+                  $state.go('^.list');
+                });
+              }
+
             };
           },
           resolve: {

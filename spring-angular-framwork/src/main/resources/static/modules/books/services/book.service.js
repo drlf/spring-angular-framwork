@@ -1,31 +1,31 @@
 (function () {
   'use strict';
   angular
-    .module('com.module.settings')
-    .service('SettingService', function ($state, CoreService, Setting, gettextCatalog) {
+    .module('com.module.books')
+    .service('BookService', function ($state, CoreService, Book, gettextCatalog) {
 
       this.find = function () {
-        return Setting.query().$promise;
+        return Book.query().$promise;
       };
 
       this.findById = function (id) {
-        return Setting.get({
+        return Book.get({
           id: id
         }).$promise;
       };
 
-      this.upsert = function (setting) {
-        return Setting.save(setting).$promise
+      this.upsert = function (book) {
+        return Book.save(book).$promise
           .then(function () {
             CoreService.toastSuccess(
-              gettextCatalog.getString('Setting saved'),
-              gettextCatalog.getString('Your setting is safe with us!')
+              gettextCatalog.getString('Book saved'),
+              gettextCatalog.getString('Your book is safe with us!')
             );
           })
           .catch(function (err) {
             CoreService.toastError(
-              gettextCatalog.getString('Error saving setting '),
-              gettextCatalog.getString('This setting could no be saved: ' + err)
+              gettextCatalog.getString('Error saving book '),
+              gettextCatalog.getString('This book could no be saved: ' + err)
             );
           }
         );
@@ -36,15 +36,15 @@
           gettextCatalog.getString('Are you sure?'),
           gettextCatalog.getString('Deleting this cannot be undone'),
           function () {
-            Setting.delete({id: id}, function () {
+            Book.delete({id: id}, function () {
               CoreService.toastSuccess(
-                gettextCatalog.getString('Setting deleted'),
-                gettextCatalog.getString('Your setting is deleted!'));
+                gettextCatalog.getString('Book deleted'),
+                gettextCatalog.getString('Your book is deleted!'));
               successCb();
             }, function (err) {
               CoreService.toastError(
-                gettextCatalog.getString('Error deleting setting'),
-                gettextCatalog.getString('Your setting is not deleted! ') + err);
+                gettextCatalog.getString('Error deleting book'),
+                gettextCatalog.getString('Your book is not deleted! ') + err);
               cancelCb();
             });
           },
@@ -55,21 +55,21 @@
       };
 
 
-      this.getFormFields = function () {
+      this.getFormFields = function (formType) {
         var form = [
           {
-            key: 'key',
+            key: 'name',
             type: 'input',
             templateOptions: {
-              label: gettextCatalog.getString('Value'),
+              label: 'Bookname',
               required: true
             }
           },
           {
-            key: 'value',
+            key: 'sid',
             type: 'input',
             templateOptions: {
-              label: gettextCatalog.getString('Key'),
+              label: 'sid',
               required: true
             }
           }

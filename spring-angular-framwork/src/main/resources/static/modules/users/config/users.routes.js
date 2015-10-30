@@ -24,14 +24,11 @@
           templateUrl: 'modules/users/views/list.html',
           controllerAs: 'ctrl',
           controller: function (users) {
-        	  console.log('users page....');
-            console.log('users', users);
             this.users = users;
           },
           resolve: {
             users: function (UserService) {
-              console.log('users');
-              return UserService.query();
+              return UserService.find();
             }
           }
         })
@@ -66,9 +63,10 @@
             this.formFields = UserService.getFormFields('edit');
             this.formOptions = {};
             this.submit = function () {
-              UserService.upsert(this.user).then(function () {
-                $state.go('^.list');
-              });
+		        this.user.props='username,email';
+		        this.user.$updatePart().then(function () {
+		          $state.go('^.list');
+		        });
             };
           },
           resolve: {

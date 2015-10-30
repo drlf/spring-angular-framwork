@@ -5,17 +5,17 @@
     .service('UserService', function ($state, CoreService, User, gettextCatalog) {
 
       this.find = function () {
-        return User.find().$promise;
+        return User.query().$promise;
       };
 
       this.findById = function (id) {
-        return User.findById({
+        return User.get({
           id: id
         }).$promise;
       };
 
       this.upsert = function (user) {
-        return User.upsert(user).$promise
+        return User.save(user).$promise
           .then(function () {
             CoreService.toastSuccess(
               gettextCatalog.getString('User saved'),
@@ -36,7 +36,7 @@
           gettextCatalog.getString('Are you sure?'),
           gettextCatalog.getString('Deleting this cannot be undone'),
           function () {
-            User.deleteById({id: id}, function () {
+            User.delete({id: id}, function () {
               CoreService.toastSuccess(
                 gettextCatalog.getString('User deleted'),
                 gettextCatalog.getString('Your user is deleted!'));
