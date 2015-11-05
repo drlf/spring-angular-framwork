@@ -16,6 +16,7 @@
 						$state.go('login');
 					});
 				};
+				$scope.authoriedmenu = AuthCoreSrv.getAuthoriedmenu();
 
 			});
 

@@ -1,0 +1,13 @@
+<li ui-sref-active="active" ng-class="{false: 'treeview'}[menu.isLeaf]">
+    <a ng-if="menu.isLeaf" class="" href="" ui-sref="{{menu.sref}}"><i class="fa fa-fw {{menu.icon}}"></i> {{menu.name}}</a>
+    <a ng-if="!menu.isLeaf" href="#" ng-click="toggle($event)">
+        <i class="fa fa-bar-chart-o"></i>
+        <span >{{menu.name}}</span>
+        <i ng-class="{true:'fa fa-angle-down pull-right', false: 'fa fa-angle-left pull-right'}[showMe]"></i>
+    </a>
+    <ul ng-if="!menu.isLeaf" class="treeview-menu" ng-style="{display: showMe? 'block' :  'none'}" >
+        <li ng-repeat="subMenuItem in menu.subMenu">
+            <a href="" ui-sref="{{subMenuItem.sref}}"> {{subMenuItem.name}}</a>
+        </li>
+    </ul>
+</li>

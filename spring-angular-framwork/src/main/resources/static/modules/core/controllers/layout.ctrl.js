@@ -12,7 +12,7 @@
    * @requires gettextCatalog
    **/
     .controller('LayoutCtrl', function ($scope, $rootScope, $cookies, CoreService, gettextCatalog) {
-      console.log('LayoutCtrl....');
+      //console.log('LayoutCtrl....');
 
       $scope.appName = 'LoopBack Admin';
       $scope.apiUrl = CoreService.env.apiUrl;

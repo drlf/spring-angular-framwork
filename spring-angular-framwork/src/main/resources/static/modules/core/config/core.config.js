@@ -14,17 +14,26 @@
       $rootScope.menu = [];
 
       // Add Sidebar Menu
-      $rootScope.addMenu = function (name, uisref, icon) {
+      $rootScope.addMenu = function (menu) {
+        $rootScope.menu.push(menu);
+      };
+
+      /*$rootScope.addMenu = function (name, uisref, icon) {
         $rootScope.menu.push({
           name: name,
           sref: uisref,
           icon: icon
         });
-      };
+      };*/
 
       // Add Menu Dashboard
-      $rootScope.addMenu(gettextCatalog.getString('Dashboard'), 'app.home',
-        'fa-dashboard');
+      //$rootScope.addMenu(gettextCatalog.getString('Dashboard'), 'app.home','fa-dashboard');
+        $rootScope.addMenu({
+          name: '系统',
+          isLeaf: true,
+          sref: 'app.home',
+          icon: 'fa-dashboard'
+        });
 
       // Dashboard
       $rootScope.dashboardBox = [];
@@ -67,7 +76,7 @@
       };
 
       // Load Settings blank
-        console.log('load setting from env....');
+        //console.log('load setting from env....');
       $rootScope.settings = {};
         $rootScope.settings.data = ENV.SETTING;
 
@@ -76,7 +85,7 @@
         Setting.query(function (settings) {
           $rootScope.settings.data = settings;
 
-          console.log($rootScope.settings);
+          //console.log($rootScope.settings);
         });
       };
 
@@ -86,13 +95,14 @@
     //by LF.
     // check the refereshtoken .Init system setting and get user info
     //$rootScope.loadSettings();
-    .run(function ($rootScope, Setting, AuthCoreSrv, StorageService, User) {
+    .run(function ($rootScope, Setting, AuthCoreSrv, StorageService, User, $location) {
         var credentials = StorageService.getCredentials();
-        //TODO if refershToken or username is null, redirect to login.html
-        AuthCoreSrv.setCredentials(credentials);
-        /*AuthCoreSrv.refereshToken(credentials.refereshToken, function(data){
+        //if refershToken or username is null, redirect to login.html
+        if(!credentials.username || !credentials.refereshToken)location.href = '/login.html';
+        AuthCoreSrv.refereshToken(credentials, function(data){
           //TODO update accessToken , user info and permission
-        });*/
+          AuthCoreSrv.setCredentials(credentials);
+        });
 
         $rootScope.currentUser = User.get({
           id : credentials.userId

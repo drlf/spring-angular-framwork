@@ -33,6 +33,7 @@ public class AccessService {
 		String accessToken = "qwerty";
 		HashMap result = new HashMap();
 		result.put("accessToken", accessToken);
+		result.put("perms", "users:list, users:add, home");
 		return result;
 	}
 	
